@@ -1,4 +1,5 @@
 import showForm from "./showForm.js";
+import renderNotes from "./renderNotes.js";
 
 const createNoteBtn = document.getElementById('createButton');
 createNoteBtn.addEventListener('click', () => {
@@ -9,3 +10,5 @@ createNoteBtn.addEventListener('click', () => {
 	}
 	showForm();
 });
+
+renderNotes();
