@@ -1,13 +1,13 @@
-import notesData from "./api/notesData.js";
+import notesData from './api/notesData.js';
 
 const updateSummary = () => {
 	const summaryData = {
 		Task: { active: 0, archived: 0 },
-		"Random Thought": { active: 0, archived: 0 },
+		'Random Thought': { active: 0, archived: 0 },
 		Idea: { active: 0, archived: 0 },
 	};
 
-	const summaryNotes = document.getElementById("summaryNotes");
+	const summaryNotes = document.getElementById('summaryNotes');
 
 	notesData.forEach((note) => {
 		if (!note.archived) {
@@ -17,13 +17,13 @@ const updateSummary = () => {
 		}
 	});
 
-	summaryNotes.innerHTML = "";
+	summaryNotes.innerHTML = '';
 
 	Object.keys(summaryData).forEach((category) => {
-		const row = document.createElement("tr");
-		const categoryCell = document.createElement("td");
-		const activeCountCell = document.createElement("td");
-		const archivedCountCell = document.createElement("td");
+		const row = document.createElement('tr');
+		const categoryCell = document.createElement('td');
+		const activeCountCell = document.createElement('td');
+		const archivedCountCell = document.createElement('td');
 
 		categoryCell.textContent = category;
 		row.appendChild(categoryCell);

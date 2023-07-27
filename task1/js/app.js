@@ -3,7 +3,6 @@ import renderNotes from "./renderNotes.js";
 import addNote from "./addNotes.js";
 import updateSummary from "./updateSummary.js";
 
-
 // Event Listeners
 const createNoteBtn = document.getElementById('createButton');
 const addNoteForm = document.getElementById('addNoteForm');
