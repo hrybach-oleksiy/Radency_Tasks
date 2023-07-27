@@ -5,6 +5,7 @@ const showForm = () => {
 	} else {
 		form.classList.add('active');
 	}
+
 };
 
 export default showForm;

@@ -2,8 +2,9 @@ import notesData from "./api/notesData.js";
 import formatDate from "./utils/formatDate.js";
 
 // Function to render notes in the table
-function renderNotes() {
-	const table = document.getElementById("activeNotesTable");
+const renderNotes = () => {
+	const activeNotes = document.getElementById('activeNotes');
+	activeNotes.innerHTML = '';
 
 	notesData.forEach(note => {
 		const row = document.createElement('tr');
@@ -40,8 +41,8 @@ function renderNotes() {
 		row.appendChild(datesCell);
 		row.appendChild(actionCell);
 
-		table.appendChild(row);
+		activeNotes.appendChild(row);
 	});
-}
+};
 
 export default renderNotes;
