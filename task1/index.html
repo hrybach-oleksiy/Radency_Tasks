@@ -17,18 +17,17 @@
 		   class="active-notes-table">
 		<thead>
 			<tr>
+				<th></th>
 				<th>Name</th>
 				<th>Created</th>
 				<th>Category</th>
 				<th>Content</th>
 				<th>Dates</th>
 				<th>
-					<button class="btn btn--archive"><img class="archive__img"
-							 src="./assets/archive.svg"
+					<button class="btn btn--archive"><img src="./assets/archive.svg"
 							 alt="Archive Icon"
 							 title="Archive"></button>
-					<button class="btn btn--delete"><img class="delete__img"
-							 src="./assets/remove.svg"
+					<button class="btn btn--delete"><img src="./assets/remove.svg"
 							 alt="Delete Icon"
 							 title="Delete"></button>
 				</th>
@@ -40,15 +39,18 @@
 	</table>
 	<button id="createButton">Create Note</button>
 	<!-- Form to add new notes -->
-	<form id="addNoteForm">
+	<form id="addNoteForm"
+		  class="add-note-form">
 		<label for="noteName">Note Name:</label>
 		<input type="text"
 			   id="noteName"
 			   required>
 		<label for="noteContent">Note Content:</label>
-		<input type="text"
-			   id="noteContent"
-			   required>
+		<textarea rows="4"
+				  cols="50"
+				  id="noteContent"
+				  required>
+		</textarea>
 		<label for="noteCategory">Note Category:</label>
 		<select id="noteCategory"
 				required>
@@ -63,18 +65,17 @@
 	<table id="archivedNotesTable">
 		<thead>
 			<tr>
+				<th></th>
 				<th>Name</th>
 				<th>Created</th>
 				<th>Category</th>
 				<th>Content</th>
 				<th>Dates</th>
 				<th>
-					<button class="btn btn--archive"><img class="archive__img"
-							 src="./assets/unarchive.svg"
+					<button class="btn btn--archive"><img src="./assets/unarchive.svg"
 							 alt="Archive Icon"
 							 title="Archive"></button>
-					<button class="btn btn--delete"><img class="delete__img"
-							 src="./assets/remove.svg"
+					<button class="btn btn--delete"><img src="./assets/remove.svg"
 							 alt="Delete Icon"
 							 title="Delete"></button>
 				</th>
@@ -98,6 +99,36 @@
 			<!-- Summary rows will be dynamically added here -->
 		</tbody>
 	</table>
+	<div id="editModal"
+		 class="modal">
+		<div class="modal-content">
+			<span class="close"
+				  id="closeModal">&times;</span>
+			<h2>Edit Note</h2>
+			<form id="editNoteForm">
+				<input type="hidden"
+					   id="editNoteId">
+				<label for="editNoteName">Note Name:</label>
+				<input type="text"
+					   id="editNoteName"
+					   required>
+				<label for="editNoteContent">Note Content:</label>
+				<textarea rows="4"
+						  cols="50"
+						  id="editNoteContent"
+						  required>
+		        </textarea>
+				<label for="editNoteCategory">Note Category:</label>
+				<select id="editNoteCategory"
+						required>
+					<option value="Task">Task</option>
+					<option value="Random Thought">Random Thought</option>
+					<option value="Idea">Idea</option>
+				</select>
+				<button type="submit">Save Changes</button>
+			</form>
+		</div>
+	</div>
 	<script src="./js/app.js"
 			type="module"></script>
 </body>

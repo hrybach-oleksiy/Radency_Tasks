@@ -1,4 +1,3 @@
-// JavaScript Data Structure
 const notesData = [
 	{
 		id: 1,
@@ -43,7 +42,7 @@ const notesData = [
 		content: 'Visited the art museum today',
 		category: 'Random Thought',
 		datesMentioned: [],
-		archived: false,
+		archived: true,
 	},
 	{
 		id: 6,

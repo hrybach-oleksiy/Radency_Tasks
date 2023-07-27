@@ -1,10 +1,9 @@
-import notesData from "./api/notesData.js";
-import renderNotes from "./renderNotes.js";
-import extractDates from "./utils/extractDates.js";
-import showForm from "./showForm.js";
-import updateSummary from "./updateSummary.js";
+import notesData from './api/notesData.js';
+import renderNotes from './renderNotes.js';
+import extractDates from './utils/extractDates.js';
+import showForm from './showForm.js';
+import updateSummary from './updateSummary.js';
 
-// Function to add a new note
 const addNote = (event) => {
 	event.preventDefault();
 
