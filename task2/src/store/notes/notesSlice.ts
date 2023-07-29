@@ -1,5 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+
 import { Note } from "../../types/note";
+
 import taskLogo from '../../assets/task.svg';
 import randomLogo from '../../assets/random.svg';
 import ideaLogo from '../../assets/idea.svg';
@@ -83,10 +85,12 @@ const notesSlice = createSlice({
 	name: "notes",
 	initialState,
 	reducers: {
-		// Add your reducer functions here
+		addNote(state, action) {
+			state.push(action.payload)
+		}
 	},
 });
 
-export const { /* Add your action creators here */ } = notesSlice.actions;
+export const { addNote } = notesSlice.actions;
 
 export default notesSlice.reducer;

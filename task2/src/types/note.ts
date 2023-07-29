@@ -1,6 +1,6 @@
 export interface Note {
 	id: number;
-	img: string;
+	img: string | undefined;
 	name: string;
 	createdAt: string;
 	content: string;
