@@ -57,7 +57,7 @@ const initialState: Note[] = [
 		content: 'Visited the art museum today',
 		category: 'Random Thought',
 		datesMentioned: [],
-		archived: true,
+		archived: false,
 	},
 	{
 		id: 6,
@@ -67,7 +67,7 @@ const initialState: Note[] = [
 		content: 'Explore new hiking trails in the mountains',
 		category: 'Idea',
 		datesMentioned: [],
-		archived: false,
+		archived: true,
 	},
 	{
 		id: 7,
@@ -87,10 +87,32 @@ const notesSlice = createSlice({
 	reducers: {
 		addNote(state, action) {
 			state.push(action.payload)
-		}
+		},
+		deleteNote(state, action) {
+			return state.filter((note) => note.id !== action.payload);
+		},
+		archiveNote(state, action) {
+			const noteToArchive = state.find(note => note.id === action.payload)
+			if (noteToArchive) {
+				noteToArchive.archived = true;
+			}
+		},
+		unarchiveNote(state, action) {
+			const noteToUnarchive = state.find(note => note.id === action.payload)
+			if (noteToUnarchive) {
+				noteToUnarchive.archived = false;
+			}
+		},
+		editNote: (state, action) => {
+			const existingNote = state.find((note) => note.id === action.payload.id);
+			console.log(existingNote)
+			if (existingNote) {
+				Object.assign(existingNote, action.payload);
+			}
+		},
 	},
 });
 
-export const { addNote } = notesSlice.actions;
+export const { addNote, deleteNote, archiveNote, unarchiveNote, editNote } = notesSlice.actions;
 
 export default notesSlice.reducer;
