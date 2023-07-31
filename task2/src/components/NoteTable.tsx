@@ -3,15 +3,17 @@ import { useDispatch } from "react-redux";
 
 import { Note } from "../types/note";
 import archivedIcon from '../assets/archive.svg';
+import unarchivedIcon from '../assets/unarchive.svg';
 import removeIcon from '../assets/remove.svg';
 import formatDate from "../utils/formatDate";
-import { deleteNote, archiveNote } from "../store/notes/notesSlice";
+import { deleteNote, archiveNote, unarchiveNote } from "../store/notes/notesSlice";
 import EditNoteModal from "./EditNoteModal";
 interface NoteTableProps {
 	notes: Note[];
+	isArchived?: boolean;
 }
 
-const NoteTable: React.FC<NoteTableProps> = ({ notes }) => {
+const NoteTable: React.FC<NoteTableProps> = ({ notes, isArchived }) => {
 	const dispatch = useDispatch();
 
 	const [showModal, setShowModal] = useState(false);
@@ -34,6 +36,10 @@ const NoteTable: React.FC<NoteTableProps> = ({ notes }) => {
 		dispatch(archiveNote(noteId));
 	}
 
+	const handleUnarchiveNote = (noteId: number) => {
+		dispatch(unarchiveNote(noteId));
+	};
+
 	return (
 		<>
 			<table>
@@ -46,10 +52,10 @@ const NoteTable: React.FC<NoteTableProps> = ({ notes }) => {
 						<th>Content</th>
 						<th>Dates</th>
 						<th className="btn-cell">
-							<button className="btn btn--archive"><img src={archivedIcon}
-								alt="Archive Icon"
-								title="Archive" /></button>
-							<button className="btn btn--delete"><img src={removeIcon}
+							<button className="btn"><img src={isArchived ? unarchivedIcon : archivedIcon}
+								alt={`${isArchived ? 'Unarchive Icon' : 'Archive Icon'}`}
+								title={`${isArchived ? 'Unarchive' : 'Archive'}`} /></button>
+							<button className="btn"><img src={removeIcon}
 								alt="Delete Icon"
 								title="Delete" /></button>
 						</th>
@@ -67,13 +73,12 @@ const NoteTable: React.FC<NoteTableProps> = ({ notes }) => {
 							<td>{note.category}</td>
 							<td>{note.datesMentioned.join(', ')}</td>
 							<td className="btn-cell">
-								<button onClick={() => { handleEditNote(note) }} className={`btn btn--edit' data-note-id='${note.id}`}>Edit</button>
-								<button onClick={() => handleArchiveNote(note.id)} className={`btn btn--${note.archived ? ' unarchive' : 'archive'}`}>
+								<button onClick={() => handleEditNote(note)} className={`btn btn--edit' data-note-id='${note.id}`}>Edit</button>
+								<button onClick={() => isArchived ? handleUnarchiveNote(note.id) : handleArchiveNote(note.id)} className="btn" >
 									<img className='archive__img'
-										// src={`./assets/${note.archived ? 'unarchive.svg' : 'archive.svg'}`}
-										src={archivedIcon}
-										alt='Archive Icon'
-										title={note.archived ? 'Unarchive' : 'Archive'}
+										src={isArchived ? unarchivedIcon : archivedIcon}
+										alt={`${isArchived ? 'Unarchive Icon' : 'Archive Icon'}`}
+										title={`${isArchived ? 'Unarchive' : 'Archive'}`}
 										data-note-id={note.id} />
 								</button>
 								<button onClick={() => handleDeleteNote(note.id)} className='btn btn--delete'>

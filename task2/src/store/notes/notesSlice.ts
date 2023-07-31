@@ -104,10 +104,10 @@ const notesSlice = createSlice({
 			}
 		},
 		editNote: (state, action) => {
-			const existingNote = state.find((note) => note.id === action.payload.id);
-			console.log(existingNote)
-			if (existingNote) {
-				Object.assign(existingNote, action.payload);
+			const editedNote = action.payload;
+			const index = state.findIndex((note) => note.id === editedNote.id);
+			if (index !== -1) {
+				state[index] = editedNote;
 			}
 		},
 	},

@@ -6,10 +6,7 @@ import { RootState } from "../store";
 import { addNote } from "../store/notes/notesSlice";
 import { Note } from "../types/note";
 import extractDates from "../utils/extractDates";
-
-import taskLogo from '../assets/task.svg';
-import randomLogo from '../assets/random.svg';
-import ideaLogo from '../assets/idea.svg';
+import setImg from "../utils/setImg";
 
 const AddNoteForm: React.FC = () => {
 	const [name, setName] = useState('');
@@ -18,18 +15,6 @@ const AddNoteForm: React.FC = () => {
 	const [isFormHidden, setIsFormHidden] = useState(true);
 
 	const notesArrayLength = useSelector((state: RootState) => state.notes.length);
-
-	const setImg = (category: string) => {
-		if (category === 'Task') {
-			return taskLogo;
-		}
-		if (category === 'Random Thought') {
-			return randomLogo;
-		}
-		if (category === 'Idea') {
-			return ideaLogo;
-		}
-	}
 
 	const handleFormVisibility = () => {
 		setIsFormHidden(!isFormHidden)
@@ -67,7 +52,7 @@ const AddNoteForm: React.FC = () => {
 				</div>
 				<div>
 					<label>Content:</label>
-					<textarea value={content} onChange={(e) => setContent(e.target.value)} required />
+					<textarea rows={4} cols={50} value={content} onChange={(e) => setContent(e.target.value)} required />
 				</div>
 				<div>
 					<label>Category:</label>

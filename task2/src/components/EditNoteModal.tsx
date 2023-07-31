@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 
 import { Note } from "../types/note";
 import { editNote } from "../store/notes/notesSlice"; // Import the editNote action
-
+import setImg from "../utils/setImg";
+import extractDates from "../utils/extractDates";
 interface EditNoteModalProps {
 	note: Note;
 	onClose: () => void; // Callback function to close the modal
@@ -18,11 +19,14 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({ note, onClose }) => {
 
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
+
 		const editedNote: Note = {
 			...note,
 			name,
+			img: setImg(category),
 			content,
 			category,
+			datesMentioned: extractDates(content),
 		};
 		dispatch(editNote(editedNote));
 		onClose();
@@ -39,11 +43,13 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({ note, onClose }) => {
 					</div>
 					<div>
 						<label>Content:</label>
-						<textarea value={content} onChange={(e) => setContent(e.target.value)} required />
+						<textarea rows={4} cols={50} value={content} onChange={(e) => setContent(e.target.value)} required />
 					</div>
 					<div>
 						<label>Category:</label>
-						<select value={category} onChange={(e) => setCategory(e.target.value)} required>
+						<select value={category} onChange={(e) => {
+							setCategory(e.target.value)
+						}} required>
 							<option value="Task">Task</option>
 							<option value="Random Thought">Random Thought</option>
 							<option value="Idea">Idea</option>
