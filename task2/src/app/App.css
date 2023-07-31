@@ -1,0 +1,117 @@
+body {
+	padding: 15px;
+}
+
+input,
+button {
+	outline: none;
+}
+
+textarea {
+	resize: none;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 10px;
+}
+
+th,
+td {
+	padding: 5px;
+	text-align: left;
+	border-bottom: 1px solid #ccc;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+
+label,
+input,
+select {
+	display: block;
+	margin-bottom: 10px;
+}
+
+button {
+	margin-top: 10px;
+}
+
+img {
+	height: 2em;
+}
+
+.add-note-form {
+	display: none;
+}
+
+.btn {
+	background: none;
+	border: 0;
+	color: #888;
+	font-size: 15px;
+	width: 60px;
+	font-family: Lato, sans-serif;
+	cursor: pointer;
+}
+
+.btn:hover {
+	color: #3a3A3a;
+}
+
+.delete__img {
+	transform: rotateZ(45deg);
+	transition: transform 200ms ease-in;
+}
+
+.delete__img:hover {
+	transform: rotateZ(0);
+}
+
+.archive__img {
+	transition: all 200ms ease-in;
+}
+
+.archive__img:hover {
+	transform: scale(1.3);
+}
+
+.btn-cell {
+	display: flex;
+}
+
+.active {
+	display: block;
+}
+
+.modal {
+	display: block;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	max-width: 500px;
+}
+
+.close {
+	float: right;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+body.modal-open {
+	overflow: hidden;
+}
