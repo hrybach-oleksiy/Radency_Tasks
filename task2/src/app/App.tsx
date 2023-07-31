@@ -1,9 +1,10 @@
-import { NotesListPage } from "./containers";
+import NotesListPage from '../pages/notesListPage';
+
 import './App.css';
 
 function App() {
 	return (
-		<div className="App">
+		<div className='App'>
 			<NotesListPage />
 		</div>
 	);

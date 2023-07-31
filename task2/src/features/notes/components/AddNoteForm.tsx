@@ -1,12 +1,11 @@
-// src/components/AddNoteForm.tsx
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../app/store';
 
-import { addNote } from "../store/notes/notesSlice";
-import { Note } from "../types/note";
-import extractDates from "../utils/extractDates";
-import setImg from "../utils/setImg";
+import { addNote } from '../notesSlice';
+import { Note } from '../../../types/note';
+import extractDates from '../../../utils/extractDates';
+import setImg from '../../../utils/setImg';
 
 const AddNoteForm: React.FC = () => {
 	const [name, setName] = useState('');
@@ -48,21 +47,21 @@ const AddNoteForm: React.FC = () => {
 			<form onSubmit={handleSubmit} className={`add-note-form ${isFormHidden ? '' : 'active'}`}>
 				<div>
 					<label>Name:</label>
-					<input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+					<input type='text' value={name} onChange={(event) => setName(event.target.value)} required />
 				</div>
 				<div>
 					<label>Content:</label>
-					<textarea rows={4} cols={50} value={content} onChange={(e) => setContent(e.target.value)} required />
+					<textarea rows={4} cols={50} value={content} onChange={(event) => setContent(event.target.value)} required />
 				</div>
 				<div>
 					<label>Category:</label>
-					<select value={category} onChange={(e) => setCategory(e.target.value)} required>
-						<option value="Task">Task</option>
-						<option value="Random Thought">Random Thought</option>
-						<option value="Idea">Idea</option>
+					<select value={category} onChange={(event) => setCategory(event.target.value)} required>
+						<option value='Task'>Task</option>
+						<option value='Random Thought'>Random Thought</option>
+						<option value='Idea'>Idea</option>
 					</select>
 				</div>
-				<button type="submit">Add Note</button>
+				<button type='submit'>Add Note</button>
 			</form>
 			<button onClick={handleFormVisibility}>{isFormHidden ? 'Create Note' : 'Close Form'}</button>
 		</>

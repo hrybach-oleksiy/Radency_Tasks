@@ -1,14 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-import { Note } from "../../types/note";
+import { Note } from '../../types/note';
 
 import taskLogo from '../../assets/task.svg';
 import randomLogo from '../../assets/random.svg';
 import ideaLogo from '../../assets/idea.svg';
 
-// Initial state with prepopulated notes
 const initialState: Note[] = [
-	// Your prepopulated notes here
 	{
 		id: 1,
 		name: 'Grocery List',
@@ -82,23 +80,29 @@ const initialState: Note[] = [
 ];
 
 const notesSlice = createSlice({
-	name: "notes",
+	name: 'notes',
 	initialState,
 	reducers: {
 		addNote(state, action) {
-			state.push(action.payload)
+			const newNote = action.payload
+
+			state.push(newNote)
 		},
 		deleteNote(state, action) {
-			return state.filter((note) => note.id !== action.payload);
+			const noteToDeleteId = action.payload
+
+			return state.filter((note) => note.id !== noteToDeleteId);
 		},
 		archiveNote(state, action) {
 			const noteToArchive = state.find(note => note.id === action.payload)
+
 			if (noteToArchive) {
 				noteToArchive.archived = true;
 			}
 		},
 		unarchiveNote(state, action) {
 			const noteToUnarchive = state.find(note => note.id === action.payload)
+
 			if (noteToUnarchive) {
 				noteToUnarchive.archived = false;
 			}
@@ -106,6 +110,7 @@ const notesSlice = createSlice({
 		editNote: (state, action) => {
 			const editedNote = action.payload;
 			const index = state.findIndex((note) => note.id === editedNote.id);
+
 			if (index !== -1) {
 				state[index] = editedNote;
 			}
