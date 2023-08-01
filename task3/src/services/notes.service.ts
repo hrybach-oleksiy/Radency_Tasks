@@ -1,17 +1,19 @@
 import { Request, Response } from "express";
 import { mockedData, Note, Category } from "../mockedData";
+import { NotesRepository } from "../repositories/notes.repository";
+
+const repository = new NotesRepository(mockedData);
 
 export class NotesController {
-	private notes: Note[] = mockedData;
 
 	getAllNotes = (req: Request, res: Response): void => {
-		res.status(200).json(this.notes);
+		const notes = repository.getAllNotes();
+		res.status(200).json(notes);
 	}
 
 	getNoteById = (req: Request, res: Response): void => {
-		const id = parseInt(req.params.id);
-		const note = this.notes.find((note) => note.id === id);
-
+		const id = Number(req.params.id);
+		const note = repository.getNoteById(id);
 		if (note) {
 			res.status(200).json(note);
 		} else {
@@ -20,58 +22,32 @@ export class NotesController {
 	}
 
 	createNote = (req: Request, res: Response): void => {
-		const newNote: Note = req.body;
-		this.notes.push(newNote);
+		const newNote = req.body as Note;
+		const createdNote = repository.createNote(newNote);
 
-		res.status(201).json(newNote);
+		res.status(201).json(createdNote);
 	}
 
 	editNote = (req: Request, res: Response): void => {
-		const id = parseInt(req.params.id);
-		const editedNote: Note = req.body;
-		const index = this.notes.findIndex((note) => note.id === id);
+		const id = Number(req.params.id);
+		const updatedNote = req.body as Note;
+		const editedNote = repository.editNote(id, updatedNote);
 
-		if (index !== -1) {
-			this.notes[index] = { ...this.notes[index], ...editedNote };
-			res.status(200).json(this.notes[index]);
+		if (editedNote) {
+			res.status(200).json(editedNote);
 		} else {
 			res.status(404).json({ message: "Note not found" });
 		}
 	}
 
 	removeNote = (req: Request, res: Response): void => {
-		const id = parseInt(req.params.id);
-		this.notes = this.notes.filter((note) => note.id !== id);
-
+		const id = Number(req.params.id);
+		repository.removeNote(id);
 		res.status(200).json({ message: "Note deleted successfully" });
 	}
 
 	getStats = (req: Request, res: Response): void => {
-		const activeStats: Record<Category, number> = {
-			"Task": 0,
-			"Random Thought": 0,
-			"Idea": 0,
-		};
-
-		const archivedStats: Record<Category, number> = {
-			"Task": 0,
-			"Random Thought": 0,
-			"Idea": 0,
-		};
-
-		this.notes.forEach((note) => {
-			if (note.archived) {
-				archivedStats[note.category]++;
-			} else {
-				activeStats[note.category]++;
-			}
-		});
-
-		const stats = {
-			active: activeStats,
-			archived: archivedStats,
-		};
-
-		res.status(200).json('stats');
+		const stats = repository.getStats();
+		res.status(200).json(stats);
 	}
 }

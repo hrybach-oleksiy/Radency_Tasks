@@ -2,15 +2,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NotesController = void 0;
 const mockedData_1 = require("../mockedData");
+const notes_repository_1 = require("../repositories/notes.repository");
+const repository = new notes_repository_1.NotesRepository(mockedData_1.mockedData);
 class NotesController {
     constructor() {
-        this.notes = mockedData_1.mockedData;
         this.getAllNotes = (req, res) => {
-            res.status(200).json(this.notes);
+            const notes = repository.getAllNotes();
+            res.status(200).json(notes);
         };
         this.getNoteById = (req, res) => {
-            const id = parseInt(req.params.id);
-            const note = this.notes.find((note) => note.id === id);
+            const id = Number(req.params.id);
+            const note = repository.getNoteById(id);
             if (note) {
                 res.status(200).json(note);
             }
@@ -20,50 +22,28 @@ class NotesController {
         };
         this.createNote = (req, res) => {
             const newNote = req.body;
-            this.notes.push(newNote);
-            res.status(201).json(newNote);
+            const createdNote = repository.createNote(newNote);
+            res.status(201).json(createdNote);
         };
         this.editNote = (req, res) => {
-            const id = parseInt(req.params.id);
-            const editedNote = req.body;
-            const index = this.notes.findIndex((note) => note.id === id);
-            if (index !== -1) {
-                this.notes[index] = Object.assign(Object.assign({}, this.notes[index]), editedNote);
-                res.status(200).json(this.notes[index]);
+            const id = Number(req.params.id);
+            const updatedNote = req.body;
+            const editedNote = repository.editNote(id, updatedNote);
+            if (editedNote) {
+                res.status(200).json(editedNote);
             }
             else {
                 res.status(404).json({ message: "Note not found" });
             }
         };
         this.removeNote = (req, res) => {
-            const id = parseInt(req.params.id);
-            this.notes = this.notes.filter((note) => note.id !== id);
+            const id = Number(req.params.id);
+            repository.removeNote(id);
             res.status(200).json({ message: "Note deleted successfully" });
         };
         this.getStats = (req, res) => {
-            const activeStats = {
-                "Task": 0,
-                "Random Thought": 0,
-                "Idea": 0,
-            };
-            const archivedStats = {
-                "Task": 0,
-                "Random Thought": 0,
-                "Idea": 0,
-            };
-            this.notes.forEach((note) => {
-                if (note.archived) {
-                    archivedStats[note.category]++;
-                }
-                else {
-                    activeStats[note.category]++;
-                }
-            });
-            const stats = {
-                active: activeStats,
-                archived: archivedStats,
-            };
-            res.status(200).json('stats');
+            const stats = repository.getStats();
+            res.status(200).json(stats);
         };
     }
 }
