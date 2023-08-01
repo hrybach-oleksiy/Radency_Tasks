@@ -2,12 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const notes_service_1 = require("../services/notes.service");
+const validation_middleware_1 = require("../middleware/validation.middleware");
 const router = (0, express_1.Router)();
 const notesController = new notes_service_1.NotesController();
 router.get("/stats", notesController.getStats);
 router.get("/", notesController.getAllNotes);
 router.get("/:id", notesController.getNoteById);
-router.post("/", notesController.createNote);
-router.patch("/:id", notesController.editNote);
+router.post("/", validation_middleware_1.validateNote, notesController.createNote);
+router.patch("/:id", validation_middleware_1.validateNote, notesController.editNote);
 router.delete("/:id", notesController.removeNote);
 exports.default = router;
