@@ -1,8 +1,10 @@
+export type Category = "Task" | "Random Thought" | "Idea";
+
 export interface Note {
 	id: number;
 	name: string;
 	createdAt: string;
-	category: string;
+	category: Category;
 	datesMentioned: string[];
 	content: string;
 	archived: boolean;
