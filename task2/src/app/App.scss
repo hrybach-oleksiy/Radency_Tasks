@@ -1,0 +1,140 @@
+body {
+	@apply bg-gray-100 pt-4
+}
+
+input,
+button,
+textarea {
+	@apply outline-none font-['Roboto'];
+}
+
+textarea {
+	@apply resize-none;
+}
+
+input,
+textarea {
+	@apply border border-transparent;
+
+	&:focus {
+		@apply border border-gray-500;
+	}
+}
+
+table {
+	@apply w-full border-collapse mb-4 table-auto;
+}
+
+th,
+td {
+	@apply p-3 text-left border-b-2;
+}
+
+td {
+	@apply text-gray-700;
+}
+
+tr {
+	&:hover {
+		@apply bg-gray-200;
+	}
+}
+
+th {
+	@apply border bg-slate-400 text-center;
+
+	&:first-child {
+		@apply border-r-0;
+	}
+}
+
+label,
+input,
+select {
+	@apply block mb-3;
+}
+
+img {
+	@apply h-8;
+}
+
+h2 {
+	@apply text-3xl font-bold ml-4 mb-4;
+}
+
+.add-note-form {
+	@apply hidden;
+}
+
+.add-note-form.active {
+	@apply m-3 flex gap-3 border p-4
+}
+
+.add-note-form .form-btn {
+	@apply self-center mb-0;
+}
+
+.btn {
+	@apply flex justify-center items-center border-none text-base w-16 cursor-pointer;
+}
+
+.btn:hover {
+	color: #3a3A3a;
+}
+
+.create-note-btn {
+	@apply border px-3 py-2 mb-4 ml-3 bg-slate-300 rounded-md transition-colors font-bold;
+
+	&:hover {
+		@apply bg-slate-400;
+	}
+}
+
+.delete__img {
+	@apply rotate-45 transition-transform duration-200 ease-in;
+}
+
+.delete__img:hover {
+	@apply rotate-0;
+}
+
+.archive__img {
+	@apply transition-all duration-200 ease-in;
+}
+
+.archive__img:hover {
+	@apply scale-125;
+}
+
+.btn-cell {
+	@apply flex;
+}
+
+th.btn-cell {
+	@apply justify-center;
+}
+
+.active {
+	@apply block;
+}
+
+.modal {
+	@apply block fixed z-10 left-0 top-0 w-full h-full bg-black bg-opacity-40;
+}
+
+.modal-content {
+	@apply bg-slate-100 mx-auto p-5 max-w-lg border my-[15%] rounded-md;
+}
+
+.form-btn-wrapper {
+	@apply flex gap-3 mt-5;
+}
+
+.form-btn {
+	@extend .create-note-btn;
+	@apply ml-0;
+}
+
+body.modal-open {
+	@apply overflow-hidden;
+}

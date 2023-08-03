@@ -1,6 +1,6 @@
 import NotesListPage from '../pages/notesListPage';
 
-import './App.css';
+import './App.scss';
 
 function App() {
 	return (

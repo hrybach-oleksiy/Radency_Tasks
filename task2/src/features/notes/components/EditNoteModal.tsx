@@ -56,9 +56,9 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({ note, onClose }) => {
 							<option value='Idea'>Idea</option>
 						</select>
 					</div>
-					<div>
-						<button type='submit'>Save Changes</button>
-						<button type='button' onClick={onClose}>Cancel</button>
+					<div className='form-btn-wrapper'>
+						<button className='form-btn' type='submit'>Save Changes</button>
+						<button className='form-btn' type='button' onClick={onClose}>Cancel</button>
 					</div>
 				</form>
 			</div>

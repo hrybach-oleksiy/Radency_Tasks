@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Note } from '../../../types/note';
-import archivedIcon from '../../../assets/archive.svg';
-import unarchivedIcon from '../../../assets/unarchive.svg';
-import removeIcon from '../../../assets/remove.svg';
+import archivedIcon from '../../../../assets/archive.svg';
+import unarchivedIcon from '../../../../assets/unarchive.svg';
+import removeIcon from '../../../../assets/remove.svg';
 import formatDate from '../../../utils/formatDate';
 import { deleteNote, archiveNote, unarchiveNote } from '../notesSlice';
 import EditNoteModal from './EditNoteModal';
+
+// import styles from './NoteTable.module.scss';
 
 interface NoteTableProps {
 	notes: Note[];
@@ -23,10 +25,12 @@ const NoteTable: React.FC<NoteTableProps> = ({ notes, isArchived }) => {
 	const handleEditNote = (note: Note) => {
 		setSelectedNote(note);
 		setShowModal(true);
+		document.body.classList.add('modal-open');
 	};
 
 	const handleCloseModal = () => {
 		setShowModal(false);
+		document.body.classList.remove('modal-open');
 	};
 
 	const handleDeleteNote = (noteId: number) => {

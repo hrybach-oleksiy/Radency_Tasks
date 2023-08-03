@@ -61,9 +61,9 @@ const AddNoteForm: React.FC = () => {
 						<option value='Idea'>Idea</option>
 					</select>
 				</div>
-				<button type='submit'>Add Note</button>
+				<button className='form-btn' type='submit'>Add Note</button>
 			</form>
-			<button onClick={handleFormVisibility}>{isFormHidden ? 'Create Note' : 'Close Form'}</button>
+			<button className='create-note-btn' onClick={handleFormVisibility}>{isFormHidden ? 'Create Note' : 'Close Form'}</button>
 		</>
 	);
 };
