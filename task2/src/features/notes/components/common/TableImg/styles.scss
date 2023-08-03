@@ -1,0 +1,15 @@
+.remove__img {
+	@apply rotate-45 transition-transform duration-200 ease-in;
+}
+
+.remove__img:hover {
+	@apply rotate-0;
+}
+
+.archive__img {
+	@apply transition-all duration-200 ease-in;
+}
+
+.archive__img:hover {
+	@apply scale-125;
+}

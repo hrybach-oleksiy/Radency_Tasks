@@ -5,6 +5,7 @@ import { Note } from '../../../types/note';
 import { editNote } from '../notesSlice';
 import setImg from '../../../utils/setImg';
 import extractDates from '../../../utils/extractDates';
+import NoteForm from './common/NoteForm/NoteForm';
 
 interface EditNoteModalProps {
 	note: Note;
@@ -33,34 +34,23 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({ note, onClose }) => {
 		onClose();
 	};
 
+	const formProps = {
+		onFormSubmit: handleSubmit,
+		onNameChange: (event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value),
+		onContentChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => setContent(event.target.value),
+		onCategoryChange: (event: React.ChangeEvent<HTMLSelectElement>) => setCategory(event.target.value),
+		onClose,
+		isFormToAdd: true,
+		name,
+		content,
+		category,
+	}
+
 	return (
 		<div className='modal'>
 			<div className='modal-content'>
 				<h2>Edit Note</h2>
-				<form onSubmit={handleSubmit}>
-					<div>
-						<label>Name:</label>
-						<input type='text' value={name} onChange={(event) => setName(event.target.value)} required />
-					</div>
-					<div>
-						<label>Content:</label>
-						<textarea rows={4} cols={50} value={content} onChange={(event) => setContent(event.target.value)} required />
-					</div>
-					<div>
-						<label>Category:</label>
-						<select value={category} onChange={(event) => {
-							setCategory(event.target.value)
-						}} required>
-							<option value='Task'>Task</option>
-							<option value='Random Thought'>Random Thought</option>
-							<option value='Idea'>Idea</option>
-						</select>
-					</div>
-					<div className='form-btn-wrapper'>
-						<button className='form-btn' type='submit'>Save Changes</button>
-						<button className='form-btn' type='button' onClick={onClose}>Cancel</button>
-					</div>
-				</form>
+				<NoteForm {...formProps} />
 			</div>
 		</div>
 	);

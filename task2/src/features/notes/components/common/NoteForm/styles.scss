@@ -1,0 +1,15 @@
+.add-note-form {
+	@apply hidden;
+}
+
+.add-note-form.active {
+	@apply m-3 flex gap-3 border p-4
+}
+
+.add-note-form .form-btn {
+	@apply self-center mb-0;
+}
+
+.form-btn-wrapper {
+	@apply flex gap-3 mt-5;
+}

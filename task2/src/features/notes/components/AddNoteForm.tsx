@@ -6,6 +6,7 @@ import { addNote } from '../notesSlice';
 import { Note } from '../../../types/note';
 import extractDates from '../../../utils/extractDates';
 import setImg from '../../../utils/setImg';
+import NoteForm from './common/NoteForm/NoteForm';
 
 const AddNoteForm: React.FC = () => {
 	const [name, setName] = useState('');
@@ -42,27 +43,21 @@ const AddNoteForm: React.FC = () => {
 		setIsFormHidden(true);
 	};
 
+	const formProps = {
+		onFormSubmit: handleSubmit,
+		onNameChange: (event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value),
+		onContentChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => setContent(event.target.value),
+		onCategoryChange: (event: React.ChangeEvent<HTMLSelectElement>) => setCategory(event.target.value),
+		isFormToAdd: false,
+		name,
+		content,
+		category,
+		isFormHidden,
+	}
+
 	return (
 		<>
-			<form onSubmit={handleSubmit} className={`add-note-form ${isFormHidden ? '' : 'active'}`}>
-				<div>
-					<label>Name:</label>
-					<input type='text' value={name} onChange={(event) => setName(event.target.value)} required />
-				</div>
-				<div>
-					<label>Content:</label>
-					<textarea rows={4} cols={50} value={content} onChange={(event) => setContent(event.target.value)} required />
-				</div>
-				<div>
-					<label>Category:</label>
-					<select value={category} onChange={(event) => setCategory(event.target.value)} required>
-						<option value='Task'>Task</option>
-						<option value='Random Thought'>Random Thought</option>
-						<option value='Idea'>Idea</option>
-					</select>
-				</div>
-				<button className='form-btn' type='submit'>Add Note</button>
-			</form>
+			<NoteForm {...formProps} />
 			<button className='create-note-btn' onClick={handleFormVisibility}>{isFormHidden ? 'Create Note' : 'Close Form'}</button>
 		</>
 	);

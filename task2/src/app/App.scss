@@ -62,50 +62,6 @@ h2 {
 	@apply text-3xl font-bold ml-4 mb-4;
 }
 
-.add-note-form {
-	@apply hidden;
-}
-
-.add-note-form.active {
-	@apply m-3 flex gap-3 border p-4
-}
-
-.add-note-form .form-btn {
-	@apply self-center mb-0;
-}
-
-.btn {
-	@apply flex justify-center items-center border-none text-base w-16 cursor-pointer;
-}
-
-.btn:hover {
-	color: #3a3A3a;
-}
-
-.create-note-btn {
-	@apply border px-3 py-2 mb-4 ml-3 bg-slate-300 rounded-md transition-colors font-bold;
-
-	&:hover {
-		@apply bg-slate-400;
-	}
-}
-
-.delete__img {
-	@apply rotate-45 transition-transform duration-200 ease-in;
-}
-
-.delete__img:hover {
-	@apply rotate-0;
-}
-
-.archive__img {
-	@apply transition-all duration-200 ease-in;
-}
-
-.archive__img:hover {
-	@apply scale-125;
-}
-
 .btn-cell {
 	@apply flex;
 }
@@ -124,15 +80,6 @@ th.btn-cell {
 
 .modal-content {
 	@apply bg-slate-100 mx-auto p-5 max-w-lg border my-[15%] rounded-md;
-}
-
-.form-btn-wrapper {
-	@apply flex gap-3 mt-5;
-}
-
-.form-btn {
-	@extend .create-note-btn;
-	@apply ml-0;
 }
 
 body.modal-open {
