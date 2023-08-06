@@ -5,7 +5,7 @@ import { NotesController } from "../controllers/notes.js";
 const router = Router();
 const notesController = new NotesController();
 
-// router.get("/stats", notesController.getStats);
+router.get("/stats", notesController.getStats);
 router.get("/", notesController.getAllNotes);
 router.get("/:id", notesController.getNoteById);
 router.post("/", notesController.createNote);
