@@ -42,4 +42,3 @@ export class Note extends Model {
 	})
 	archived: boolean;
 }
-

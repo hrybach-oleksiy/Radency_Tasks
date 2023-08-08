@@ -11,6 +11,12 @@ export class NotesController {
 		return this.notesService.getAllNotes();
 	}
 
+	@Get('stats')
+	async getStats() {
+		const stats = await this.notesService.getStats();
+		return { stats };
+	}
+
 	@Get(':id')
 	async getNoteById(@Param('id') id: number): Promise<Note> {
 		return this.notesService.getNoteById(id);
@@ -30,11 +36,4 @@ export class NotesController {
 	async deleteNote(@Param('id') id: number): Promise<void> {
 		return this.notesService.deleteNote(id);
 	}
-
-	@Get('stats')
-	async getStats() {
-		const stats = await this.notesService.getStats();
-		return { stats };
-	}
-
 }
